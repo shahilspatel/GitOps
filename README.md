@@ -2,7 +2,12 @@
 
 
 <h2>Description</h2>
-Project consists of an application running in Kubernetes then a code change is pushed to GitHub. As soon as the changes are committed, a Jenkins job get submitted automatically, builds a new image and then pushes the new image to DockerHub. The deployment file for the application will be changed with the newest image ID and the new image will be automatically deployed to the Kubernetes cluster, which causes our application to point at the new pod.
+Project consists of an application with a repository in GitHub with a app.py file  for the Kubernetes base code and a deployment.yaml file for Kubternetes manifest files. When the code is pushed to GitHub, a Jenkins job, buildimage, will be triggered to build a Docker container image hosted on DockerHub. After this, the Jenkins job will then trigger another Jenkins job, updatemanifest, which will update the image in the deployment.yaml in GitHub. ArgoCD will detect the manifest file change and automatically deploy the new deployment.yaml file to Kubernetes cluster.
+
+GitOps vs. DevOps:
+- Periodically syncs the running Kubernetes cluster with the desired state in Git Repo
+- Increased security due to CD and CD permissions being separated and less number of components
+- DevOps is necessary to deploy a Kubernetes cluster and Continuous Integration.
 <br />
 
 
@@ -11,7 +16,8 @@ Project consists of an application running in Kubernetes then a code change is p
 - <b>AWS</b> 
 - <b>Kubernetes</b>
 - <b>Jenkins</b>
-- <b>Docker</b>
+- <b>DockerHub</b>
+- <b>ArgoCD</b>
 
 <h2>Environments Used </h2>
 
